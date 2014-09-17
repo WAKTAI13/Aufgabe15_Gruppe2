@@ -371,7 +371,7 @@ namespace Minesweeper_Reloaded
                 if (Button.Text == "X")
                 {
                     minesLeft++;
-                    Button.Text = " ";
+                    Button.Text = "";
                     Button.BackColor = Color.FromArgb(150, 150, 150);
                 }
                 else
@@ -390,7 +390,7 @@ namespace Minesweeper_Reloaded
             if (mineLabel != null)
             {
                 mineLabel.Text = minesLeft.ToString();
-                if (minesLeft <= 0)
+                if (minesLeft == 0)
                 {
                     if (winTest())
                     {
@@ -427,16 +427,37 @@ namespace Minesweeper_Reloaded
         {
             var Button = (Button)sender;
 
+
+
             if (!tmr.Enabled)
             {
                 tmr.Enabled = true;
             }
 
+            if (Button.Text != "X")
+            {
+                checkButton(Button);
+            }
 
-            checkButton(Button);
 
+            updateMineLabel();
 
+            debugPrint();
+        }
 
+        public void debugPrint()
+        {
+            foreach (String value in arr)
+            {
+                if (value == "")
+                {
+                    Console.Write("#");
+                }
+                else
+                {
+                    Console.Write(value);
+                }
+            }
 
         }
 
@@ -457,6 +478,10 @@ namespace Minesweeper_Reloaded
 
                 int W = getCoordinateW(Button);
                 int H = getCoordinateH(Button);
+
+                //int pos = W + (kante * H);
+                //arr[pos] = zahl.ToString();
+
                 check_neighbours(W, H);
             }
         }
@@ -510,6 +535,7 @@ namespace Minesweeper_Reloaded
                 arr = arr_schwer;
                 f = f4;
             }
+            arr[0] = "#";
 
 
             int position = W + (kante * H) - kante;
@@ -662,7 +688,7 @@ namespace Minesweeper_Reloaded
                             zahl++;
                     }
                 }
-
+                arr[position] = zahl.ToString();    //Befülle das Array an der derzeitigen Buttonstelle mit der Zahl, damit es aus dem WinTest fällt
 
 
             }
@@ -806,7 +832,7 @@ namespace Minesweeper_Reloaded
             int randomNumber = 1;
             for (int i = 0; i <= (kante * kante); i++)
             {
-                arr_leicht[i] = "-";
+                arr_leicht[i] = "";
             }
             randomNumber = random.Next(0, (kante * kante));
             while (mines > 0)
@@ -824,7 +850,7 @@ namespace Minesweeper_Reloaded
             int randomNumber = 1;
             for (int i = 0; i <= (kante * kante); i++)
             {
-                arr_mittel[i] = "-";
+                arr_mittel[i] = "";
             }
             randomNumber = random.Next(0, (kante * kante));
             while (mines > 0)
@@ -842,7 +868,7 @@ namespace Minesweeper_Reloaded
             int randomNumber = 1;
             for (int i = 0; i <= (kante * kante); i++)
             {
-                arr_schwer[i] = "-";
+                arr_schwer[i] = "";
             }
             randomNumber = random.Next(0, (kante * kante));
             while (mines > 0)

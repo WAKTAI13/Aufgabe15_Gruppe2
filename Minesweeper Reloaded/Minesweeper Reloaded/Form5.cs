@@ -51,7 +51,7 @@ namespace Minesweeper_Reloaded
             System.IO.StreamReader fileMittel = new System.IO.StreamReader("Highscore_mittel.txt");
             System.IO.StreamReader fileSchwer = new System.IO.StreamReader("Highscore_schwer.txt");
 
-            MessageBox.Show("Mode: " + mode.ToString());
+            //MessageBox.Show("Mode: " + mode.ToString());
             switch (mode)
             {
                 case 1:
@@ -171,7 +171,7 @@ namespace Minesweeper_Reloaded
                 pair1[0] = eingabe;
                 pair1[1] = myTime.ToString();
             }
-            MessageBox.Show("Neuer Platz: " + newPlace.ToString());
+            //MessageBox.Show("Neuer Platz: " + newPlace.ToString());
             switch (mode)
             {
                 case 2:
